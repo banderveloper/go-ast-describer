@@ -1,0 +1,50 @@
+# IntelliJ IDEA
+.idea/
+*.iml
+*.iws
+out/
+# Ignore all the idea files and directories
+.idea/*
+
+# Visual Studio Code
+.vscode/
+.history/
+*.code-workspace
+
+# Go binaries
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# Go build files
+*.o
+*.a
+*.out
+
+# Go vendor directory
+vendor/
+
+# Dependency directories
+Godeps/
+bin/
+pkg/
+
+# Log files
+*.log
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Test results
+*.test
+*.coverprofile
+*.cover.out
+
+# IDE specific settings
+*.swp
+*.swo
+*.bak
+*~
