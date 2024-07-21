@@ -114,9 +114,9 @@ func getStructMethods(structName string, node ast.Node) []model.StructMethodMode
 				if starExpr, ok := fn.Recv.List[0].Type.(*ast.StarExpr); ok {
 					if ident, ok := starExpr.X.(*ast.Ident); ok && ident.Name == structName {
 						method := model.StructMethodModel{
-							Name:        fn.Name.Name,
-							ReturnTypes: getReturnTypes(fn.Type.Results),
-							Arguments:   getArguments(fn.Type.Params),
+							Name:       fn.Name.Name,
+							Returnings: getReturnTypes(fn.Type.Results),
+							Arguments:  getArguments(fn.Type.Params),
 						}
 						methods = append(methods, method)
 					}
@@ -130,25 +130,34 @@ func getStructMethods(structName string, node ast.Node) []model.StructMethodMode
 }
 
 // getReturnTypes extracts the return types from the function result fields.
-func getReturnTypes(results *ast.FieldList) []string {
-	var returnTypes []string
+func getReturnTypes(results *ast.FieldList) []model.StructMethodArg {
+	var returnTypes []model.StructMethodArg
 	if results != nil {
-		for _, result := range results.List {
-			returnTypes = append(returnTypes, getTypeName(result.Type))
+		for i, result := range results.List {
+			name := ""
+			if len(result.Names) > 0 {
+				name = result.Names[0].Name
+			}
+			returnTypes = append(returnTypes, model.StructMethodArg{
+				Index: i,
+				Name:  name,
+				Type:  getTypeName(result.Type),
+			})
 		}
 	}
 	return returnTypes
 }
 
 // getArguments extracts the arguments from the function parameter fields.
-func getArguments(params *ast.FieldList) []model.StructMethodArgument {
-	var arguments []model.StructMethodArgument
+func getArguments(params *ast.FieldList) []model.StructMethodArg {
+	var arguments []model.StructMethodArg
 	if params != nil {
-		for _, param := range params.List {
+		for i, param := range params.List {
 			for _, name := range param.Names {
-				argument := model.StructMethodArgument{
-					Name: name.Name,
-					Type: getTypeName(param.Type),
+				argument := model.StructMethodArg{
+					Index: i,
+					Name:  name.Name,
+					Type:  getTypeName(param.Type),
 				}
 				arguments = append(arguments, argument)
 			}

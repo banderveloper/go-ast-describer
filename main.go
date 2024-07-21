@@ -7,7 +7,7 @@ import (
 
 func main() {
 
-	node, err := GetParsedFile("model/struct_model.go")
+	node, err := GetParsedFile("/home/nikita/Downloads/golang_web_services_2024-04-26/5/99_hw/codegen/api.go")
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -34,7 +34,9 @@ func main() {
 		fmt.Println("Methods:")
 		for _, method := range str.Methods {
 
-			fmt.Printf("\tName: %s | Return type: %v | Accepts: %v\n", method.Name, method.ReturnTypes, method.Arguments)
+			fmt.Printf("\tName: %s | Return types: %v | Accepts: %v\n", method.Name, method.Returnings, method.Arguments)
 		}
+
+		fmt.Println()
 	}
 }
