@@ -4,9 +4,10 @@ import "strings"
 
 // description of struct
 type StructModel struct {
-	Name     string             // typename of structure
-	Comments []string           // list of comments above structure, without // and trimmed
-	Fields   []StructFieldModel // list of fields
+	Name     string              // typename of structure
+	Comments []string            // list of comments above structure, without // and trimmed
+	Fields   []StructFieldModel  // list of fields
+	Methods  []StructMethodModel // list of methods
 }
 
 // get all structure comments with given prefix, including it

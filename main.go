@@ -30,5 +30,11 @@ func main() {
 
 			fmt.Printf("\tName: %s | Type: %s | Tag: %s\n", field.Name, field.Type, field.StructTag)
 		}
+
+		fmt.Println("Methods:")
+		for _, method := range str.Methods {
+
+			fmt.Printf("\tName: %s | Return type: %v | Accepts: %v\n", method.Name, method.ReturnTypes, method.Arguments)
+		}
 	}
 }
