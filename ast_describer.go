@@ -55,7 +55,7 @@ func GetStructsModels(fileNode *ast.File) ([]model.StructModel, error) {
 			curStructModel := model.StructModel{}
 
 			curStructModel.Name = currType.Name.Name
-			curStructModel.Comments = getStructComments(genDecl.Doc)
+			curStructModel.Comments = getComments(genDecl.Doc)
 			curStructModel.Fields = getStructFields(currStruct)
 			curStructModel.Methods = getStructMethods(curStructModel.Name, fileNode)
 
@@ -67,7 +67,7 @@ func GetStructsModels(fileNode *ast.File) ([]model.StructModel, error) {
 	return result, nil
 }
 
-func getStructComments(typeDoc *ast.CommentGroup) []string {
+func getComments(typeDoc *ast.CommentGroup) []string {
 
 	result := make([]string, 0)
 
@@ -117,6 +117,7 @@ func getStructMethods(structName string, node ast.Node) []model.StructMethodMode
 							Name:       fn.Name.Name,
 							Returnings: getReturnTypes(fn.Type.Results),
 							Arguments:  getArguments(fn.Type.Params),
+							Comments:   getComments(fn.Doc),
 						}
 						methods = append(methods, method)
 					}

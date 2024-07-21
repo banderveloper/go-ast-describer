@@ -35,6 +35,7 @@ func main() {
 		for _, method := range str.Methods {
 
 			fmt.Printf("\tName: %s | Return types: %v | Accepts: %v\n", method.Name, method.Returnings, method.Arguments)
+			fmt.Printf("\tComments: %v\n", method.Comments)
 		}
 
 		fmt.Println()
